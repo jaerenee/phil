@@ -25,12 +25,11 @@
         animation:
           typing 3.5s steps(23, end),
           blink-caret .75s step-end infinite;
+        animation-play-state: paused;
       }
 
       @keyframes typing {
         from { width: 0 }
-        /* to { width: 300px } */
-        /* to { width: max-content} */
       }
 
       @keyframes blink-caret {
@@ -43,30 +42,34 @@
     <div class="full-screen-image">
       <div class="typing-animation">imagine, design, create</div>
     </div>
-        <script>
-          window.onload = () => {
-            // Get the typing animation element
-            const typingAnimation = document.querySelector('.typing-animation');
 
-            // Create a temporary element to measure the width of the text
-            const tempElement = document.createElement('div');
-            tempElement.style.position = 'absolute';
-            tempElement.style.visibility = 'hidden';
-            tempElement.style.whiteSpace = 'nowrap';
-            tempElement.innerText = typingAnimation.innerText;
-            document.body.appendChild(tempElement);
+    <script>
+      window.onload = () => {
+        // Get the typing animation element
+        const typingAnimation = document.querySelector('.typing-animation');
 
-            // Get the width of the text
-            const textWidth = tempElement.offsetWidth;
+        // Create a temporary element to measure the width of the text
+        const tempElement = document.createElement('div');
+        tempElement.style.position = 'absolute';
+        tempElement.style.visibility = 'hidden';
+        tempElement.style.whiteSpace = 'nowrap';
+        tempElement.innerText = typingAnimation.innerText;
+        document.body.appendChild(tempElement);
 
-            // Remove the temporary element
-            document.body.removeChild(tempElement);
+        // Get the width of the text
+        const textWidth = tempElement.offsetWidth;
 
-            // Create a new style element
-            const styleElement = document.createElement('style');
-            styleElement.innerText = `@keyframes typing { to { width: ${textWidth}px } }`;
-            document.head.appendChild(styleElement);
-          }
+        // Remove the temporary element
+        document.body.removeChild(tempElement);
+
+        // Create a new style element
+        const styleElement = document.createElement('style');
+        styleElement.innerText = `@keyframes typing { to { width: ${textWidth}px } }`;
+        document.head.appendChild(styleElement);
+
+        // Resume the typing animation
+        typingAnimation.style.animationPlayState = 'running';
+      };
     </script>
   </body>
 </html>
