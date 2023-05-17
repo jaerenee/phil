@@ -1,0 +1,5 @@
+includes
+- typing text
+- image change size (unless too small, still good)
+needs
+- something interactive
